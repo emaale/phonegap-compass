@@ -8,6 +8,8 @@
 
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
+        <!-- CSS stylesheets -->
+        <link rel="stylesheet" type="text/css" href="css/index.css">
 
         <title>Compass</title>
     </head>
@@ -15,8 +17,15 @@
 
         <h1>Compass</h1>
 
+        <!-- Displays the angle at which the compass is pointed -->
+        <h2 class="angle"></h2>
+
+        <!-- Canvas to draw the compass on -->
+        <canvas></canvas>
+
         <!-- Scripts -->
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/compass.js"></script>
+
     </body>
 </html>
