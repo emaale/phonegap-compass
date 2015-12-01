@@ -84,6 +84,9 @@ function drawCompass(angle) {
 	
 	var ctx = compass.el.getContext("2d");
 
+	// Clear previous drawings
+	ctx.clearRect(0, 0, compass.width, compass.height);
+
 	// Draw directions
 	ctx.font = "24px Arial";
 	ctx.fillStyle = compass.color.text;
