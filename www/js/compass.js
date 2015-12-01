@@ -36,7 +36,7 @@ function drawCompass(angle) {
 	};
 
 	// Display degrees
-	document.querySelector(".example").innerHTML = "&deg;" + angle;
+	document.querySelector(".angle").innerHTML = "&deg;" + angle;
 
 	// Draw the compass with the provided angle
 }
