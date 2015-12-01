@@ -118,5 +118,11 @@ function drawCompass(angle) {
 	ctx.strokeStyle = compass.color.south;
 	ctx.fill();
 
+	ctx.beginPath(); // Divider line
+	ctx.moveTo(compass.needle.south.startpoints.one.x, compass.needle.south.startpoints.one.y);
+	ctx.lineTo(compass.needle.south.startpoints.two.x, compass.needle.south.startpoints.two.y);
+	ctx.strokeStyle = "#333";
+	ctx.fill();
+
 	ctx.stroke();
 }

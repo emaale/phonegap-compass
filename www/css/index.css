@@ -15,9 +15,10 @@ h2 {
 #compass {
     border: 15px solid #34495e;
     margin: 50px auto;
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
     padding: 0;
+    display: block;
     background: #3498db;
     border-radius: 50%;
 }
