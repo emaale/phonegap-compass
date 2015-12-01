@@ -12,14 +12,18 @@ function onDeviceReady() {
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
 }
 
+// Runs when compass heading is sucessfully gathered
 function onSuccess(heading) {
-    alert(heading.magneticHeading);
+    // Draw the compass with the new heading
+    drawCompass(heading.magneticHeading);
 };
 
+// Runs when errors occur trying to gather compass heading
 function onError(compassError) {
     alert('Compass error: ' + compassError.code);
 };
 
+// Draws the compass and all its components
 function drawCompass(angle) {
 	// Properties for the compass
 	var compass = {
