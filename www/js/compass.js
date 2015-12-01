@@ -25,18 +25,95 @@ function onError(compassError) {
 
 // Draws the compass and all its components
 function drawCompass(angle) {
-	// Properties for the compass
-	var compass = {
-		background: "#2ecc71",
-		width: 40,
-		color: {
-			north: "#e74c3c",
-			south: "#ecf0f1"
-		}
-	};
-
 	// Display degrees
 	document.querySelector(".angle").innerHTML = "&deg;" + angle;
 
-	// Draw the compass with the provided angle
+	// Properties for the compass	
+	var compass = {
+		width: 200,
+	    height: 200,
+	    middle: 100,
+	    needle: {
+	        length: 90,
+	        width: 7,
+	        north: {
+	        	endpoint: {},
+	            startpoints: {
+	            	one: {},
+	            	two: {},
+	        	}
+	        },
+	    	south: {
+	        	endpoint: {},
+	            startpoints: {
+	            	one: {},
+	            	two: {},
+	        	}
+	        },
+	    },
+		color: {			
+	        north: "#e74c3c",
+			south: "#ecf0f1",
+	        text: "#fff"
+		},
+	    el: document.getElementById("compass"),
+	    init: function() {
+	        // Set needle endpoints
+	    	this.needle.north.endpoint.x = Math.round(this.needle.length * Math.cos(angle * Math.PI / 180)) + this.middle;
+	        this.needle.north.endpoint.y = Math.round(this.needle.length * Math.sin((angle + 180) * Math.PI / 180) + this.middle);
+	        
+	        this.needle.south.endpoint.x = Math.round(this.needle.length * Math.cos((angle + 180) * Math.PI / 180)) + this.middle;
+	        this.needle.south.endpoint.y = Math.round(this.needle.length * Math.sin((angle) * Math.PI / 180) + this.middle);
+	        
+	        // Set startpoints 1 and 2
+	        this.needle.north.startpoints.one.x = Math.round(this.needle.width * Math.cos((angle - 90) * Math.PI / 180)) + this.middle;
+	        this.needle.north.startpoints.one.y = Math.round(this.needle.width * Math.sin((angle + 180 - 90) * Math.PI / 180)) + this.middle;
+	        
+	        this.needle.north.startpoints.two.x = Math.round(this.needle.width * Math.cos((angle + 90) * Math.PI / 180)) + this.middle;
+	        this.needle.north.startpoints.two.y = Math.round(this.needle.width * Math.sin((angle + 180 + 90) * Math.PI / 180)) + this.middle;
+	        
+	        this.needle.south.startpoints.one.x = Math.round(this.needle.width * Math.cos((angle - 90 - 180) * Math.PI / 180)) + this.middle;
+	        this.needle.south.startpoints.one.y = Math.round(this.needle.width * Math.sin((angle - 90) * Math.PI / 180)) + this.middle;
+	        
+	        this.needle.south.startpoints.two.x = Math.round(this.needle.width * Math.cos((angle + 90 - 180) * Math.PI / 180)) + this.middle;
+	        this.needle.south.startpoints.two.y = Math.round(this.needle.width * Math.sin((angle + 90) * Math.PI / 180)) + this.middle;
+	        
+	        return this;
+		}
+	}.init();
+	
+	var ctx = compass.el.getContext("2d");
+
+	// Draw directions
+	ctx.font = "24px Arial";
+	ctx.fillStyle = compass.color.text;
+	ctx.textAlign = "center";
+	ctx.fillText("N", compass.width/2, 35);
+	ctx.fillText("S", compass.width/2, compass.height - 15);
+	ctx.fillText("E", compass.width - 22, compass.middle + 8);
+	ctx.fillText("W", 22, compass.middle + 8);
+
+	// Draw needle
+	ctx.beginPath(); // North needle
+	ctx.moveTo(compass.middle, compass.middle);
+	ctx.lineTo(compass.needle.north.startpoints.one.x, compass.needle.north.startpoints.one.y);
+	ctx.lineTo(compass.needle.north.endpoint.x, compass.needle.north.endpoint.y);
+	ctx.lineTo(compass.needle.north.startpoints.two.x, compass.needle.north.startpoints.two.y);
+	ctx.lineTo(compass.middle, compass.middle);
+	ctx.fillStyle = compass.color.north;
+	ctx.strokeStyle = compass.color.north;
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath(); // South needle
+	ctx.moveTo(compass.middle, compass.middle);
+	ctx.lineTo(compass.needle.south.startpoints.one.x, compass.needle.south.startpoints.one.y);
+	ctx.lineTo(compass.needle.south.endpoint.x, compass.needle.south.endpoint.y);
+	ctx.lineTo(compass.needle.south.startpoints.two.x, compass.needle.south.startpoints.two.y);
+	ctx.lineTo(compass.middle, compass.middle);
+	ctx.fillStyle = compass.color.south;
+	ctx.strokeStyle = compass.color.south;
+	ctx.fill();
+
+	ctx.stroke();
 }
