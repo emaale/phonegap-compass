@@ -6,8 +6,8 @@ function onDeviceReady() {
 
     // Options for the navigator
     var options = {
-        frequency: 50
-    }; // Update every 3 seconds
+        frequency: 16
+    }; // Update ~60 fps
 
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
 }
