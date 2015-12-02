@@ -30,9 +30,9 @@ function drawCompass(angle) {
 
 	// Properties for the compass	
 	var compass = {
-		width: 400,
-	    height: 400,
-	    middle: 200,
+		width: 300,
+	    height: 300,
+	    middle: 150,
 	    needle: {
 	        length: 90,
 	        width: 7,
